@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Allcomments from "./Allcomments";
 
 const CommentsBox = () => {
   const [inputComment, setinputComment] = useState("");
@@ -9,7 +10,6 @@ const CommentsBox = () => {
 
   }
 
-  console.log(comments);
 
   return (
     <div>
@@ -21,6 +21,7 @@ const CommentsBox = () => {
         onChange={(e) => setinputComment(e.target.value)}
       />
       <button onClick={handleCommentsubmit}>submit</button>
+      <Allcomments allcoments={comments} />
     </div>
   );
 };

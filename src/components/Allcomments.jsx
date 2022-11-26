@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Allcomments = () => {
+const Allcomments = ({allcoments}) => {
+    console.log(allcoments);
   return (
     <div>Allcomments</div>
   )
