@@ -7,16 +7,16 @@ const CommentsBox = () => {
   const [comments, setcomments] = useState([]);
 
   useEffect(() => {
-    getallcommetns();
+    getallcomments();
   }, []);
 
   const handleCommentsubmit = () => {
     return axios
-      .post("http://localhost:8080/comments", { comments: inputComment })
-      .then(() => getallcommetns());
+      .post("http://localhost:8080/comments", { comment: inputComment })
+      .then(() => getallcomments());
   };
 
-  const getallcommetns = async () => {
+  const getallcomments = async () => {
     return await axios
       .get("http://localhost:8080/comments")
       .then((res) => setcomments(res.data))
@@ -34,7 +34,7 @@ const CommentsBox = () => {
       />
       <button onClick={handleCommentsubmit}>submit</button>
       {comments.map((c) => (
-        <p>{c.comments}</p>
+        <p>{c.comment}</p>
       ))}
     </div>
   );
