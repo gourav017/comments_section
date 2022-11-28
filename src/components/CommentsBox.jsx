@@ -5,7 +5,7 @@ import axios from "axios";
 const CommentsBox = () => {
   const [inputComment, setinputComment] = useState("");
   const [comments, setcomments] = useState([]);
-
+  //  const [replyshowflag, setreplyshowflag] = useState(false)
   useEffect(() => {
     getallcomments();
   }, []);
@@ -23,6 +23,12 @@ const CommentsBox = () => {
       .catch((err) => console.log(err));
   };
 
+  const handledelete = (id) => {
+    return axios 
+      .delete(`http://localhost:8080/comments/${id}`)
+      .then(() => getallcomments());
+  };
+
   return (
     <div>
       CommentsBox
@@ -34,7 +40,10 @@ const CommentsBox = () => {
       />
       <button onClick={handleCommentsubmit}>submit</button>
       {comments.map((c) => (
-        <p>{c.comment}</p>
+        <p>
+          {c.comment}
+          <button onClick={() => handledelete(c.id)}>reply</button>
+        </p>
       ))}
     </div>
   );
