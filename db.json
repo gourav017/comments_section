@@ -17,12 +17,12 @@
     },
     {
       "comment": "dfgdfgdf",
-      "isReply": false,
+      "isReply": true,
       "id": 4
     },
     {
       "comment": "dfgdfgdfsdgdfg",
-      "isReply": false,
+      "isReply": true,
       "id": 5
     }
   ]

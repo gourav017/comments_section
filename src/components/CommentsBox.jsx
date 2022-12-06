@@ -6,7 +6,7 @@ const CommentsBox = () => {
   const [inputComment, setinputComment] = useState("");
   const [comments, setcomments] = useState([]);
   //  const [replyshowflag, setreplyshowflag] = useState(false)
-  const [replyinput, setreplyinput] = useState('')
+  const [replyinput, setreplyinput] = useState("");
   useEffect(() => {
     getallcomments();
   }, []);
@@ -27,17 +27,13 @@ const CommentsBox = () => {
       .catch((err) => console.log(err));
   };
 
-  const handlereply = (id) => {
-    let u = comments.map((c) =>
-      c.id === id ? { ...c, isReply: !c.isReply } : c
-    );
-
-    setcomments(u);
+  const handlereply = async (id,isReply) => {
+    return await axios
+      .patch(`http://localhost:8080/comments/${id}`, {isReply:!isReply })
+      .then(() => getallcomments());
   };
 
-  const handlereplySubmit=()=>{
-    
-  }
+  const handlereplySubmit = () => {};
 
   return (
     <div>
@@ -54,13 +50,18 @@ const CommentsBox = () => {
           {c.comment}
           {c.isReply ? (
             <>
-              <input type="text" placeholder="reply..." value={replyinput} onChange={(e)=>setreplyinput(e.target.value)} />
-              <button onClick={handlereplySubmit} >submit your reply😁</button>
+              <input
+                type="text"
+                placeholder="reply..."
+                value={replyinput}
+                onChange={(e) => setreplyinput(e.target.value)}
+              />
+              <button onClick={handlereplySubmit}>submit your reply😁</button>
             </>
           ) : (
             ""
           )}
-          <button onClick={()=>handlereply(c.id)}>reply</button>
+          <button onClick={() => handlereply(c.id,c.isReply)}>reply</button>
         </p>
       ))}
     </div>
